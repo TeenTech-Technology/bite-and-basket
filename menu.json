@@ -1,0 +1,48 @@
+{
+  "restaurant": {
+    "name": "Bite & Basket",
+    "phone": "+260 965 749 929",
+    "whatsapp": "260965749929",
+    "address": "6 Chindo Road, Woodlands, Lusaka",
+    "saturdayTime": "6:30 PM"
+  },
+  "special": {
+    "active": true,
+    "label": "Saturday Evening Special",
+    "title": "Authentic Indian Vegetarian Buffet",
+    "price": null,
+    "priceNote": "per person",
+    "included": "Soft drinks & water included",
+    "footnote": "Freshly prepared with love"
+  },
+  "ordering": {
+    "enabled": true
+  },
+  "categories": [
+    {
+      "id": "begin",
+      "title": "To begin",
+      "items": [
+        { "name": "Puri with Ragda" },
+        { "name": "Crispy Spring Rolls" }
+      ]
+    },
+    {
+      "id": "pots",
+      "title": "From the pots",
+      "items": [
+        { "name": "Butter Naan" },
+        { "name": "Shahi Paneer" },
+        { "name": "Dal Lehsuni" },
+        { "name": "Jeera Rice" }
+      ]
+    },
+    {
+      "id": "finish",
+      "title": "To finish",
+      "items": [
+        { "name": "Gulab Jamun / Basundi", "choices": ["Gulab Jamun", "Basundi"] }
+      ]
+    }
+  ]
+}

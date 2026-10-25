@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bite &amp; Basket Restaurant | Saturday Indian vegetarian buffet, Woodlands, Lusaka</title>
-<meta name="description" content="Bite &amp; Basket Restaurant, 6 Chindo Road, Woodlands, Lusaka. Join us every Saturday from 6:30 PM for an Indian vegetarian buffet, freshly prepared with love.">
+<meta name="description" content="Bite &amp; Basket Restaurant, 6 Chindo Road, Woodlands, Lusaka. Saturday Indian vegetarian buffet from 6:30 PM. Reserve a table or order takeaway through WhatsApp.">
 <meta name="theme-color" content="#7a1f1a">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
@@ -21,9 +21,10 @@
 
 <!--
   NOTE FOR TEAM TEEN TECH / BITE & BASKET:
-  PRICE MISMATCH. The Saturday poster says K130 per person, but the Facebook caption says K135.
-  No price is shown on this page on purpose. Once the restaurant confirms the right figure,
-  replace the "Ask us for this week's price on WhatsApp" lines (search for "price") with it.
+  The dishes, prices, sold-out flags and the Saturday special live in menu.json (same folder).
+  PRICE MISMATCH: the Saturday poster says K130 per person, the Facebook caption says K135.
+  "special.price" in menu.json is null on purpose, so no price is shown until the owner decides.
+  Edit menu.json only; this page reads it when it loads.
 -->
 
 <!-- Icon sprite -->
@@ -50,6 +51,26 @@
     </symbol>
     <symbol id="i-diamond" viewBox="0 0 12 12"><path d="M6 0l6 6-6 6-6-6z" fill="currentColor"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24">
+      <rect x="3.5" y="5" width="17" height="15.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M3.5 10h17M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24">
+      <path d="M5 8h14l-1 12.5H6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M9 10V7a3 3 0 0 1 6 0v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24">
+      <rect x="8.5" y="8.5" width="11" height="11.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M15.5 8.5V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h2.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-people" viewBox="0 0 24 24">
+      <circle cx="9" cy="8.5" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M3 19.5c.6-3.3 3-5 6-5s5.4 1.7 6 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M15.5 5.6a3 3 0 0 1 0 5.8M17.5 14.8c1.9.6 3.1 2.2 3.5 4.7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
   </defs>
 </svg>
 
@@ -61,6 +82,12 @@
       <span class="brand-name">Bite <em>&amp;</em> Basket</span>
       <span class="brand-sub">Restaurant<span class="hide-xs"> &middot; Woodlands, Lusaka</span></span>
     </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#menu">Menu</a>
+      <a href="#reserve">Reserve</a>
+      <a href="#order">Order</a>
+      <a href="#visit">Find us</a>
+    </nav>
     <a class="btn btn-wa btn-sm" href="https://wa.me/260965749929?text=Hello%20Bite%20%26%20Basket%2C%20I%27d%20like%20to%20ask%20about%20the%20Saturday%20buffet." target="_blank" rel="noopener">
       <svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>
       <span>WhatsApp<span class="hide-xs"> us</span></span>
@@ -77,12 +104,12 @@
       <div class="hero-copy">
         <p class="eyebrow">Saturday Evening Special</p>
         <h1>Saturday evenings are for good food and the people you love.</h1>
-        <p class="lead">Every Saturday we lay out an Indian vegetarian buffet, freshly prepared with love. Come with family, come with friends, and take your time.</p>
+        <p class="lead">Every Saturday we lay out an Indian vegetarian buffet, freshly prepared with love. Reserve a table in a minute, or order a takeaway and we will have it ready.</p>
 
         <ul class="facts">
           <li>
             <svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>
-            <div><span class="k">When</span><span class="v">Every Saturday, from 6:30 PM onwards</span></div>
+            <div><span class="k">When</span><span class="v" id="fact-when">Every Saturday, from 6:30 PM onwards</span></div>
           </li>
           <li>
             <svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>
@@ -90,14 +117,18 @@
           </li>
           <li>
             <svg class="ico" aria-hidden="true"><use href="#i-tag"/></svg>
-            <div><span class="k">Price</span><span class="v">Ask us for this week&rsquo;s price on WhatsApp</span></div>
+            <div><span class="k">Price</span><span class="v" id="fact-price">Ask us for this week&rsquo;s price on WhatsApp</span></div>
           </li>
         </ul>
 
         <div class="cta-row">
-          <a class="btn btn-wa" href="#reserve">
-            <svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>
+          <a class="btn btn-maroon" href="#reserve">
+            <svg class="ico" aria-hidden="true"><use href="#i-calendar"/></svg>
             <span>Reserve a table</span>
+          </a>
+          <a class="btn btn-ghost" href="#order" id="hero-order">
+            <svg class="ico" aria-hidden="true"><use href="#i-bag"/></svg>
+            <span>Order takeaway</span>
           </a>
           <a class="btn btn-ghost" href="tel:+260965749929">
             <svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>
@@ -175,126 +206,195 @@
         <p class="eyebrow">On the buffet</p>
         <h2 id="menu-h">The Saturday menu</h2>
         <p>The whole buffet is vegetarian, freshly prepared for the evening. Take a plate, go back for another, and leave a little room for something sweet.</p>
-        <p class="included">
+        <p class="included" id="menu-included">
           <svg class="ico" aria-hidden="true"><use href="#i-diamond"/></svg>
-          Soft drinks and water are included.
+          <span>Soft drinks and water are included.</span>
         </p>
         <p class="note">Bring family and friends.</p>
+        <div class="menu-actions">
+          <a class="btn btn-maroon btn-sm" href="#reserve"><svg class="ico" aria-hidden="true"><use href="#i-calendar"/></svg><span>Reserve a table</span></a>
+          <a class="btn btn-ghost btn-sm" href="#order"><svg class="ico" aria-hidden="true"><use href="#i-bag"/></svg><span>Order takeaway</span></a>
+        </div>
       </div>
 
       <article class="menu-card" aria-label="Saturday Evening Special menu">
-        <div class="menu-inner">
-          <header class="menu-head">
-            <p class="small">Saturday Evening Special</p>
-            <h3>Authentic Indian Vegetarian Buffet</h3>
-            <p class="small">6:30 PM onwards</p>
-          </header>
-
-          <div class="course">
-            <h4>To begin</h4>
-            <ul>
-              <li>Puri with Ragda</li>
-              <li>Crispy Spring Rolls</li>
-            </ul>
-          </div>
-          <div class="course">
-            <h4>From the pots</h4>
-            <ul>
-              <li>Butter Naan</li>
-              <li>Shahi Paneer</li>
-              <li>Dal Lehsuni</li>
-              <li>Jeera Rice</li>
-            </ul>
-          </div>
-          <div class="course">
-            <h4>To finish</h4>
-            <ul>
-              <li>Gulab Jamun <span class="or">/</span> Basundi</li>
-            </ul>
-          </div>
-
-          <p class="menu-foot">Soft drinks &amp; water included<br><em>Freshly prepared with love</em></p>
+        <div class="menu-inner" id="menu-body" aria-live="polite">
+          <p class="menu-loading">Loading the menu&hellip;</p>
         </div>
       </article>
     </div>
   </section>
 
-  <!-- HOW TO JOIN -->
+  <!-- HOW IT WORKS -->
   <section class="join" id="join" aria-labelledby="join-h">
     <div class="wrap join-grid">
       <div class="join-head">
         <p class="eyebrow">Come along</p>
-        <h2 id="join-h">How to join us</h2>
-        <p>The easiest way to hold a place is a quick message on WhatsApp. Tell us how many of you are coming and which Saturday, and we will take it from there.</p>
+        <h2 id="join-h">How it works</h2>
+        <p>No accounts and no payments online. You fill in a short form, we open WhatsApp with your message already written, and you press send. We reply to confirm.</p>
       </div>
 
       <ol class="steps">
         <li>
           <span class="num" aria-hidden="true">1</span>
           <div>
-            <h3>Send us a message</h3>
-            <p>Tap the button and a message is ready for you. Or use the little form just below.</p>
-            <a class="btn btn-wa btn-sm" href="https://wa.me/260965749929?text=Hello%20Bite%20%26%20Basket%2C%20I%27d%20like%20to%20reserve%20a%20table%20for%20the%20Saturday%20buffet." target="_blank" rel="noopener">
-              <svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg><span>Message on WhatsApp</span>
-            </a>
+            <h3>Fill in the form</h3>
+            <p>Reserve a table, or choose your dishes for takeaway or delivery. It takes about a minute.</p>
+            <a class="btn btn-ghost btn-sm" href="#reserve"><svg class="ico" aria-hidden="true"><use href="#i-calendar"/></svg><span>Go to the form</span></a>
           </div>
         </li>
         <li>
           <span class="num" aria-hidden="true">2</span>
           <div>
-            <h3>Prefer to talk?</h3>
-            <p>You can also ring us on <a class="inline" href="tel:+260965749929">+260 965 749 929</a>.</p>
-            <a class="btn btn-ghost btn-sm" href="tel:+260965749929">
-              <svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><span>Tap to call</span>
+            <h3>Send it on WhatsApp</h3>
+            <p>You will get a reference code and a neat message to send us. Nothing reaches us until you press send in WhatsApp.</p>
+            <a class="btn btn-wa btn-sm" href="https://wa.me/260965749929?text=Hello%20Bite%20%26%20Basket%2C%20I%27d%20like%20to%20ask%20about%20the%20Saturday%20buffet." target="_blank" rel="noopener">
+              <svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg><span>Or just say hello</span>
             </a>
           </div>
         </li>
         <li>
           <span class="num" aria-hidden="true">3</span>
           <div>
-            <h3>Come on Saturday</h3>
-            <p>We are at <strong>6 Chindo Road, Woodlands, Lusaka</strong>. The buffet is on from 6:30 PM onwards.</p>
-            <a class="btn btn-ghost btn-sm" href="https://www.google.com/maps/search/?api=1&amp;query=6+Chindo+Road+Woodlands+Lusaka" target="_blank" rel="noopener">
-              <svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg><span>Open in Maps</span>
-            </a>
+            <h3>We confirm, you enjoy</h3>
+            <p>We reply with a yes, or a better time if we are full. Then come to <strong>6 Chindo Road, Woodlands</strong>, or wait for your order.</p>
+            <a class="btn btn-ghost btn-sm" href="tel:+260965749929"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><span>Prefer to call?</span></a>
           </div>
         </li>
       </ol>
     </div>
   </section>
 
-  <!-- RESERVE FORM -->
+  <!-- RESERVE -->
   <section class="reserve" id="reserve" aria-labelledby="reserve-h">
     <div class="blockprint light" aria-hidden="true"></div>
     <div class="wrap reserve-grid">
       <div class="reserve-copy">
-        <p class="eyebrow">Reserve a table on WhatsApp</p>
+        <p class="eyebrow">Reserve a table</p>
         <h2 id="reserve-h">Tell us when, and how many.</h2>
-        <p>Fill in three small things and we will open WhatsApp with your message already written. You can change it before you send. Nothing is sent until you press send in WhatsApp.</p>
-        <p class="price-line">Ask us for this week&rsquo;s price on WhatsApp.</p>
+        <p>Fill in the details and we will write the WhatsApp message for you, with a reference code so we can find your booking quickly. You can change the message before you send it.</p>
+        <p class="price-line">A booking is confirmed once we reply to you on WhatsApp.</p>
       </div>
 
-      <form class="rform" id="rform" novalidate>
-        <div class="field">
-          <label for="f-name">Your name</label>
-          <input id="f-name" name="name" type="text" autocomplete="name" placeholder="e.g. Mulenga" required>
-        </div>
-        <div class="field-row">
+      <div class="card-wrap">
+        <form class="rform" id="rform" novalidate>
           <div class="field">
-            <label for="f-people">Number of people</label>
-            <input id="f-people" name="people" type="number" inputmode="numeric" min="1" max="60" value="2" required>
+            <label for="r-name">Your name</label>
+            <input id="r-name" name="name" type="text" autocomplete="name" maxlength="60" placeholder="e.g. Mulenga" required>
           </div>
           <div class="field">
-            <label for="f-date">Date</label>
-            <input id="f-date" name="date" type="date" required>
+            <label for="r-phone">Phone number</label>
+            <input id="r-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="e.g. 097 123 4567" required>
           </div>
-        </div>
-        <p class="hint" id="f-hint" role="status" aria-live="polite">The buffet is on Saturdays.</p>
-        <button class="btn btn-wa btn-block" type="submit">
-          <svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>
-          <span>Open in WhatsApp</span>
-        </button>
-      </form>
+          <div class="field-row">
+            <div class="field">
+              <label for="r-people">Number of people</label>
+              <input id="r-people" name="people" type="number" inputmode="numeric" min="1" max="60" value="2" required>
+            </div>
+            <div class="field">
+              <label for="r-date">Date</label>
+              <input id="r-date" name="date" type="date" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="r-time">Time</label>
+            <input id="r-time" name="time" type="time" value="18:30" required>
+          </div>
+          <p class="hint" id="r-hint" role="status" aria-live="polite">The buffet is on Saturdays.</p>
+          <div class="field">
+            <label for="r-notes">Anything we should know? <span class="opt">(optional)</span></label>
+            <textarea id="r-notes" name="notes" rows="3" maxlength="300" placeholder="A birthday, a high chair, a quiet corner"></textarea>
+          </div>
+          <p class="form-error" id="r-error" role="alert" hidden></p>
+          <button class="btn btn-maroon btn-block" type="submit">
+            <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg>
+            <span>Prepare my message</span>
+          </button>
+        </form>
+        <div class="done" id="r-done" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORDER -->
+  <section class="order" id="order" aria-labelledby="order-h">
+    <div class="wrap order-grid">
+      <div class="order-copy">
+        <p class="eyebrow">Takeaway and delivery</p>
+        <h2 id="order-h">Order ahead, and we will have it ready.</h2>
+        <p>Choose what you would like and how many, tell us whether you will collect or want it delivered, and we will write the order for you. Send it on WhatsApp and we will confirm what is available.</p>
+        <p class="order-note" id="order-note">Prices are confirmed by the restaurant when they reply to your order. Delivery areas and any delivery charge are agreed on WhatsApp.</p>
+      </div>
+
+      <div class="card-wrap">
+        <form class="rform oform" id="oform" novalidate>
+          <fieldset class="picker">
+            <legend>1. Choose your dishes</legend>
+            <div id="order-list" class="order-list"><p class="menu-loading">Loading the menu&hellip;</p></div>
+          </fieldset>
+
+          <div class="osum" id="osum" aria-live="polite">
+            <p class="osum-empty">Nothing chosen yet.</p>
+          </div>
+
+          <fieldset class="picker">
+            <legend>2. Pickup or delivery</legend>
+            <div class="seg">
+              <label><input type="radio" name="mode" value="pickup" checked><span>Pickup</span></label>
+              <label><input type="radio" name="mode" value="delivery"><span>Delivery</span></label>
+            </div>
+          </fieldset>
+
+          <div class="field" id="o-addr-wrap" hidden>
+            <label for="o-address">Delivery address</label>
+            <textarea id="o-address" name="address" rows="2" maxlength="200" placeholder="House number, road, area, and a landmark if you have one"></textarea>
+          </div>
+
+          <fieldset class="picker">
+            <legend>3. Your details</legend>
+            <div class="field">
+              <label for="o-name">Your name</label>
+              <input id="o-name" name="name" type="text" autocomplete="name" maxlength="60" placeholder="e.g. Mulenga" required>
+            </div>
+            <div class="field">
+              <label for="o-phone">Phone number</label>
+              <input id="o-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="e.g. 097 123 4567" required>
+            </div>
+            <div class="field">
+              <label for="o-when">When do you need it? <span class="opt">(optional)</span></label>
+              <input id="o-when" name="when" type="text" maxlength="60" placeholder="e.g. Saturday at 7 PM">
+            </div>
+            <div class="field">
+              <label for="o-notes">Notes <span class="opt">(optional)</span></label>
+              <textarea id="o-notes" name="notes" rows="2" maxlength="300" placeholder="Less spicy, extra naan, allergies"></textarea>
+            </div>
+          </fieldset>
+
+          <p class="form-error" id="o-error" role="alert" hidden></p>
+          <button class="btn btn-maroon btn-block" type="submit">
+            <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg>
+            <span>Prepare my order</span>
+          </button>
+        </form>
+        <div class="done" id="o-done" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section class="visit" id="visit" aria-labelledby="visit-h">
+    <div class="blockprint" aria-hidden="true"></div>
+    <div class="wrap visit-grid">
+      <div>
+        <p class="eyebrow">Find us</p>
+        <h2 id="visit-h">6 Chindo Road, Woodlands, Lusaka</h2>
+        <p>The Saturday buffet starts at 6:30 PM. For anything else, a call or a WhatsApp is the quickest way to reach us.</p>
+      </div>
+      <div class="visit-actions">
+        <a class="btn btn-maroon" href="tel:+260965749929"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><span>Call +260 965 749 929</span></a>
+        <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&amp;query=6+Chindo+Road+Woodlands+Lusaka" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg><span>Open in Maps</span></a>
+        <a class="btn btn-wa" href="https://wa.me/260965749929?text=Hello%20Bite%20%26%20Basket%2C%20I%27d%20like%20to%20ask%20about%20..." target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg><span>WhatsApp us</span></a>
+      </div>
     </div>
   </section>
 
